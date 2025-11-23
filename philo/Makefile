@@ -6,26 +6,27 @@
 #    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/23 14:07:23 by waroonwork@       #+#    #+#              #
-#    Updated: 2025/11/23 14:12:59 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/11/23 16:16:29 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=	philo
 
 CC				:=	cc
-CFLAG			:=	-Wall -Wextra -Werror -g3
+CFLAG			:=	-Wall -Wextra -Werror -g3 -pthread
 
 INC_DIR			:=	includes/
 SRCS_DIR		:=	srcs/
 
 SRCS_FILES		:=	main.c \
+					utils/utils1.c
 
 SRCS			:=	$(SRCS_FILES:%.c=$(SRCS_DIR)%.c)
 OBJS			:=	$(SRCS:%.c=%.o)
 
 all				:	$(NAME)
 
-$(NAME)			:	$(OBJS)
+$(NAME)			:	$(OBJS)	Makefile
 	$(CC) $(CFLAG) -I$(INC_DIR) $(OBJS) -o $(NAME)
 
 %.o				:	%.c

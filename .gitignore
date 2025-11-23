@@ -2,3 +2,4 @@
 *.out
 *test*
 .vscode
+philo/philo

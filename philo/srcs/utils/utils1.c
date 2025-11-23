@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 15:47:44 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/23 15:48:27 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/23 16:56:50 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ long	ft_atol(const char *nptr)
 		i++;
 	}
 	return (ans * neg);
+}
+
+long	get_time_in_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

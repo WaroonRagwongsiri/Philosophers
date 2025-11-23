@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:15 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/23 19:58:03 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/23 20:01:25 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_table(t_table *table, int argc, char **argv)
 	table->thread = malloc(sizeof(pthread_t) * table->n_philo);
 	table->philo_arr = malloc(sizeof(t_philo) * table->n_philo);
 	table->fork_arr = malloc(sizeof(int) * table->n_philo);
+	pthread_mutex_init(&table->mutex, NULL);
 	if (argc == 6)
 		table->n_eat_end = ft_atol(argv[5]);
 }
@@ -40,6 +41,7 @@ void	init_philo(t_table *table)
 		table->philo_arr[i].t_sleep = table->t_sleep;
 		table->philo_arr[i].eat_count = 0;
 		table->philo_arr[i].fork_arr = table->fork_arr;
+		table->philo_arr[i].mutex = &table->mutex;
 	}
 }
 
@@ -64,6 +66,7 @@ void	end_thread(t_table *table, int th_created)
 	i = -1;
 	while (++i < th_created)
 		pthread_join(table->thread[i], NULL);
+	pthread_mutex_destroy(&table->mutex);
 }
 
 void	free_table(t_table *table)

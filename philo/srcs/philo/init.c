@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:15 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/23 16:55:16 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/23 19:58:03 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void	init_philo(t_table *table)
 	i = -1;
 	while (++i < table->n_philo)
 	{
+		table->fork_arr[i] = 0;
 		table->philo_arr[i].index = i;
 		table->philo_arr[i].t_die = table->t_die;
 		table->philo_arr[i].t_eat = table->t_eat;
 		table->philo_arr[i].t_sleep = table->t_sleep;
 		table->philo_arr[i].eat_count = 0;
+		table->philo_arr[i].fork_arr = table->fork_arr;
 	}
 }
 

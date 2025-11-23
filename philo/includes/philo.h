@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/23 16:56:30 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/11/23 19:58:20 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,19 @@ typedef struct s_philo
 	int	t_eat;
 	int	t_sleep;
 	int	eat_count;
+	int	*fork_arr;
 }	t_philo;
 
 typedef struct s_table
 {
-	int			n_philo;
-	int			t_die;
-	int			t_eat;
-	int			t_sleep;
-	int			n_eat_end;
-	int			*fork_arr;
-	t_philo		*philo_arr;
-	pthread_t	*thread;
+	int				n_philo;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				n_eat_end;
+	int				*fork_arr;
+	t_philo			*philo_arr;
+	pthread_t		*thread;
 }	t_table;
 
 // Init

@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 15:47:44 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/23 16:56:50 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/11 19:51:45 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ long	get_time_in_ms(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+bool	validate_parser(int argc, char **argv)
+{
+	if (ft_atol(argv[1]) < 1 || ft_atol(argv[2]) < 1 || ft_atol(argv[3]) < 1
+		|| ft_atol(argv[4]) < 1)
+		return (false);
+	if (argc == 6 && ft_atol(argv[5]) < 1)
+		return (false);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:08:41 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/11/23 16:53:50 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/11 19:52:23 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 	int		th_created;
 
 	if (argc != 5 && argc != 6)
+		return (write(2, "Invalid Arguments\n", 18), 1);
+	if (!validate_parser(argc, argv))
 		return (write(2, "Invalid Arguments\n", 18), 1);
 	init_table(&table, argc, argv);
 	if (!table.fork_arr || !table.philo_arr || !table.thread)

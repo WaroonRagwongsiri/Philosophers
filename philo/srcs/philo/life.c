@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/11 19:09:47 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/11 19:53:26 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static bool	is_wait_longest(t_table *table, t_philo *philo);
 
 void	*philo_life(void *arg)
 {
-	t_philo	*philo = (t_philo *)arg;
-	
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
 	philo->last_time_eat = get_time_in_ms();
 	while (get_time_in_ms() - philo->last_time_eat < philo->t_die)
 	{
@@ -33,14 +34,13 @@ void	*philo_life(void *arg)
 			{
 				eat(philo, philo->index);
 				pthread_mutex_unlock(&philo->table->mutex);
-				break;
+				break ;
 			}
 			pthread_mutex_unlock(&philo->table->mutex);
 		}
 		printf("%ld %d is sleeping\n", get_time_in_ms(), philo->index);
 		usleep(philo->t_sleep * 1000);
 	}
-	printf("%ld %d is died\n", get_time_in_ms(), philo->index);
 	return (NULL);
 }
 

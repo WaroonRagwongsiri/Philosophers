@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/10 22:09:59 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/11 19:51:56 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_table
 	t_philo			*philo_arr;
 	pthread_t		*thread;
 	pthread_mutex_t	mutex;
+	bool			philo_died;
 }	t_table;
 
 // Init
@@ -58,5 +59,6 @@ long	ft_atol(const char *nptr);
 long	get_time_in_ms(void);
 void	end_thread(t_table *table, int th_created);
 void	free_table(t_table *table);
+bool	validate_parser(int argc, char **argv);
 
 #endif

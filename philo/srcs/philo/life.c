@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/10 22:27:33 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/11 19:09:47 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,27 @@ static bool	is_wait_longest(t_table *table, t_philo *philo);
 
 void	*philo_life(void *arg)
 {
-	t_philo			*philo;
-
-	philo = (t_philo *) arg;
+	t_philo	*philo = (t_philo *)arg;
+	
 	philo->last_time_eat = get_time_in_ms();
-	while (true)
+	while (get_time_in_ms() - philo->last_time_eat < philo->t_die)
 	{
-		pthread_mutex_lock(&philo->table->mutex);
-		if (can_eat(philo->table, philo->index))
-			eat(philo, philo->index);
-		else
-			printf("%ld %d is thinking\n", get_time_in_ms(), philo->index);
-		pthread_mutex_unlock(&philo->table->mutex);
+		printf("%ld %d is thinking\n", get_time_in_ms(), philo->index);
+		while (get_time_in_ms() - philo->last_time_eat < philo->t_die)
+		{
+			pthread_mutex_lock(&philo->table->mutex);
+			if (can_eat(philo->table, philo->index))
+			{
+				eat(philo, philo->index);
+				pthread_mutex_unlock(&philo->table->mutex);
+				break;
+			}
+			pthread_mutex_unlock(&philo->table->mutex);
+		}
+		printf("%ld %d is sleeping\n", get_time_in_ms(), philo->index);
+		usleep(philo->t_sleep * 1000);
 	}
+	printf("%ld %d is died\n", get_time_in_ms(), philo->index);
 	return (NULL);
 }
 
@@ -73,7 +81,6 @@ static void	drop_fork(t_table *table, int index)
 	right = (index + 1) % table->n_philo;
 	table->fork_arr[left] = 0;
 	table->fork_arr[right] = 0;
-	printf("%ld %d has taken a fork\n", get_time_in_ms(), index);
 }
 
 static void	eat(t_philo *philo, int index)
@@ -86,7 +93,7 @@ static void	eat(t_philo *philo, int index)
 	start_time = get_time_in_ms();
 	philo->last_time_eat = start_time;
 	t_eat = philo->t_eat;
-	while (get_time_in_ms() - start_time < t_eat);
+	usleep(t_eat * 1000);
 	drop_fork(philo->table, philo->index);
 }
 

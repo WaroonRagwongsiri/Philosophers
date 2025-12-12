@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 13:56:19 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 16:31:56 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ typedef struct s_table
 	int				t_eat;
 	int				t_sleep;
 	int				n_eat_end;
-	int				philo_eat_count;
+	volatile int	philo_eat_count;
 	int				*fork_arr;
 	t_philo			*philo_arr;
 	pthread_t		*thread;
+	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	mutex;
-	bool			philo_died;
+	pthread_mutex_t	print_mutex;
+	volatile bool	philo_died;
 }	t_table;
 
 // Init
@@ -54,6 +56,10 @@ int		init_thread(t_table *table);
 
 // Philo life
 void	*philo_life(void *arg);
+bool	should_stop(t_philo *philo, t_table *table);
+
+// Philo life Utils
+void	print_status(t_philo *philo, char *status);
 
 // Utils
 long	ft_atol(const char *nptr);

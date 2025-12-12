@@ -6,7 +6,7 @@
 #    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/23 14:07:23 by waroonwork@       #+#    #+#              #
-#    Updated: 2025/11/23 16:57:16 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/12/12 16:02:34 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS_DIR		:=	srcs/
 
 SRCS_FILES		:=	main.c \
 					utils/utils1.c \
-					philo/init.c philo/life.c
+					philo/init.c philo/life.c philo/life_utils.c
 
 SRCS			:=	$(SRCS_FILES:%.c=$(SRCS_DIR)%.c)
 OBJS			:=	$(SRCS:%.c=%.o)

@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 20:36:52 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 21:18:15 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ void	*philo_life(void *arg)
 
 	philo = (t_philo *)arg;
 	table = (t_table *) philo->table;
+	if (philo->index % 2 == 0)
+		usleep(1000);
 	philo->last_time_eat = get_time_in_ms();
 	while (table->philo_eat_count < table->n_philo)
 	{
 		if (should_stop(philo, table))
 			break ;
 		print_status(philo, "is thinking");
-		while (table->philo_eat_count < table->n_philo)
-		{
-			if (can_eat(table, philo->index))
-				eat(philo);
-			break ;
-		}
+		if (can_eat(table, philo->index))
+			eat(philo);
 		if (should_stop(philo, table))
 			break ;
 		print_status(philo, "is sleeping");

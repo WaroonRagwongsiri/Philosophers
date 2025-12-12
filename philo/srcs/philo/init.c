@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:15 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/11 19:31:56 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 13:57:10 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_table(t_table *table, int argc, char **argv)
 	table->t_eat = ft_atol(argv[3]);
 	table->t_sleep = ft_atol(argv[4]);
 	table->n_eat_end = -1;
+	table->philo_eat_count = 0;
 	table->thread = malloc(sizeof(pthread_t) * table->n_philo);
 	table->philo_arr = malloc(sizeof(t_philo) * table->n_philo);
 	table->fork_arr = malloc(sizeof(int) * table->n_philo);

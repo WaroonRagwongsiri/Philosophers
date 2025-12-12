@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 15:47:44 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/11 19:51:45 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 20:28:25 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ bool	validate_parser(int argc, char **argv)
 	if (ft_atol(argv[1]) < 1 || ft_atol(argv[2]) < 1 || ft_atol(argv[3]) < 1
 		|| ft_atol(argv[4]) < 1)
 		return (false);
+	if (ft_atol(argv[1]) > INT_MAX || ft_atol(argv[2]) > INT_MAX
+		|| ft_atol(argv[3]) > INT_MAX || ft_atol(argv[4]) > INT_MAX)
+		return (false);
 	if (argc == 6 && ft_atol(argv[5]) < 1)
+		return (false);
+	if (argc == 6 && ft_atol(argv[5]) > INT_MAX)
 		return (false);
 	return (true);
 }

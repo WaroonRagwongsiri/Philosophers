@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:15 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 15:59:10 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 20:26:09 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	init_thread(t_table *table)
 	while (++i < table->n_philo)
 		pthread_mutex_init(&table->fork_mutex[i], NULL);
 	i = -1;
-		while (++i < table->n_philo)
+	while (++i < table->n_philo)
 	{
 		if (pthread_create(&(table->thread[i])
 				, NULL, philo_life, &(table->philo_arr[i])) != 0)

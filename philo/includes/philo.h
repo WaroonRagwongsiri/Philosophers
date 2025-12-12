@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 16:31:56 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 20:15:57 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <limits.h>
 
 typedef struct s_philo
 {

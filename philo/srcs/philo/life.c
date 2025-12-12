@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 17:13:28 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 20:26:51 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static bool	can_eat(t_table *table, int index);
 static void	eat(t_philo *philo);
 static void	drop_fork(t_table *table, int index);
-static bool	is_wait_longest(t_table *table, t_philo *philo);
 
 void	*philo_life(void *arg)
 {
@@ -46,14 +45,15 @@ void	*philo_life(void *arg)
 
 static bool	can_eat(t_table *table, int index)
 {
-	int	*fork_arr;
-	int	left;
-	int	right;
+	int		*fork_arr;
+	int		left;
+	int		right;
+	bool	can;
 
 	fork_arr = table->fork_arr;
 	left = index % table->n_philo;
 	right = (index + 1) % table->n_philo;
-	if (left == right || !is_wait_longest(table, &table->philo_arr[index]))
+	if (left == right)
 		return (false);
 	if (left < right)
 	{
@@ -65,19 +65,18 @@ static bool	can_eat(t_table *table, int index)
 		pthread_mutex_lock(&table->fork_mutex[right]);
 		pthread_mutex_lock(&table->fork_mutex[left]);
 	}
+	can = false;
 	if (fork_arr[left] == 0 && fork_arr[right] == 0)
 	{
 		table->fork_arr[left] = 1;
 		table->fork_arr[right] = 1;
-		pthread_mutex_unlock(&table->fork_mutex[left]);
-		pthread_mutex_unlock(&table->fork_mutex[right]);
 		print_status(&table->philo_arr[index], "has taken a fork");
 		print_status(&table->philo_arr[index], "has taken a fork");
-		return (true);
+		can = true;
 	}
 	pthread_mutex_unlock(&table->fork_mutex[left]);
 	pthread_mutex_unlock(&table->fork_mutex[right]);
-	return (false);
+	return (can);
 }
 
 static void	drop_fork(t_table *table, int index)
@@ -119,20 +118,4 @@ static void	eat(t_philo *philo)
 	usleep(t_eat * 1000);
 	philo->last_time_eat = get_time_in_ms();
 	drop_fork(philo->table, philo->index);
-}
-
-static bool	is_wait_longest(t_table *table, t_philo *philo)
-{
-	int		i;
-	long	max_longest;
-
-	max_longest = philo->last_time_eat;
-	i = 0;
-	while (i < table->n_philo)
-	{
-		if (philo->last_time_eat < max_longest)
-			max_longest = philo->last_time_eat;
-		++i;
-	}
-	return (max_longest == philo->last_time_eat);
 }

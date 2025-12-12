@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 20:15:57 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 21:05:07 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool	should_stop(t_philo *philo, t_table *table);
 
 // Philo life Utils
 void	print_status(t_philo *philo, char *status);
+void	mutex_order(t_table *table, int left, int right);
 
 // Utils
 long	ft_atol(const char *nptr);

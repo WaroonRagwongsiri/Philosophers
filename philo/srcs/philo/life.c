@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 20:26:51 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/12 20:36:52 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,7 @@ static bool	can_eat(t_table *table, int index)
 	right = (index + 1) % table->n_philo;
 	if (left == right)
 		return (false);
-	if (left < right)
-	{
-		pthread_mutex_lock(&table->fork_mutex[left]);
-		pthread_mutex_lock(&table->fork_mutex[right]);
-	}
-	else
-	{
-		pthread_mutex_lock(&table->fork_mutex[right]);
-		pthread_mutex_lock(&table->fork_mutex[left]);
-	}
+	mutex_order(table, left, right);
 	can = false;
 	if (fork_arr[left] == 0 && fork_arr[right] == 0)
 	{
@@ -86,16 +77,7 @@ static void	drop_fork(t_table *table, int index)
 
 	left = index % table->n_philo;
 	right = (index + 1) % table->n_philo;
-	if (left < right)
-	{
-		pthread_mutex_lock(&table->fork_mutex[left]);
-		pthread_mutex_lock(&table->fork_mutex[right]);
-	}
-	else
-	{
-		pthread_mutex_lock(&table->fork_mutex[right]);
-		pthread_mutex_lock(&table->fork_mutex[left]);
-	}
+	mutex_order(table, left, right);
 	table->fork_arr[left] = 0;
 	table->fork_arr[right] = 0;
 	pthread_mutex_unlock(&table->fork_mutex[left]);

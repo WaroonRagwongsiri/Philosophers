@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/13 21:04:20 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/13 22:17:45 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	*philo_life(void *arg)
 		if (should_stop(philo, table))
 			break ;
 		print_status(philo, "is thinking");
-		if (can_eat(table, philo->index))
-			eat(philo);
+		while (!can_eat(table, philo->index))
+		{
+			if (should_stop(philo, table))
+				break ;
+		}
+		if (should_stop(philo, table))
+				break ;
+		eat(philo);
 		if (should_stop(philo, table))
 			break ;
 		print_status(philo, "is sleeping");
@@ -53,7 +59,9 @@ static bool	can_eat(t_table *table, int index)
 		return (false);
 	pthread_mutex_lock(&table->waiter);
 	can = false;
-	if (fork_arr[left] == 0 && fork_arr[right] == 0)
+	if (should_give_fork(table, index))
+		can = false;
+	else if (fork_arr[left] == 0 && fork_arr[right] == 0)
 	{
 		table->fork_arr[left] = 1;
 		table->fork_arr[right] = 1;
@@ -84,11 +92,11 @@ static void	eat(t_philo *philo)
 	print_status(philo, "is eating");
 	t_eat = philo->t_eat;
 	philo->eat_count++;
+	philo->last_time_eat = get_time_in_ms();
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->eat_count == philo->table->n_eat_end)
 		philo->table->philo_eat_count++;
 	pthread_mutex_unlock(&philo->table->mutex);
 	usleep(t_eat * 1000);
-	philo->last_time_eat = get_time_in_ms();
 	drop_fork(philo->table, philo->index);
 }

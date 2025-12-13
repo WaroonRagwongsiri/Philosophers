@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 15:54:59 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/13 21:01:19 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/13 21:26:41 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,22 @@ bool	should_stop(t_philo *philo, t_table *table)
 		stop = true;
 	}
 	return (stop);
+}
+
+bool	should_give_fork(t_table *table, int index)
+{
+	long	my_last_eat;
+	long	left_last_eat;
+	long	right_last_eat;
+	int		left;
+	int		right;
+
+	my_last_eat = table->philo_arr[index].last_time_eat;
+	left = (index - 1 + table->n_philo) % table->n_philo;
+	right = (index + 1) % table->n_philo;
+	left_last_eat = table->philo_arr[left].last_time_eat;
+	right_last_eat = table->philo_arr[right].last_time_eat;
+	if (left_last_eat < my_last_eat || right_last_eat < my_last_eat)
+		return (true);
+	return (false);
 }

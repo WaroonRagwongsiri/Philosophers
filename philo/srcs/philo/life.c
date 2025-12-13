@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 22:08:27 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/13 21:04:20 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static bool	can_eat(t_table *table, int index);
 static void	eat(t_philo *philo);
 static void	drop_fork(t_table *table, int index);
-static bool	should_give_fork(t_table *table, int index);
 
 void	*philo_life(void *arg)
 {
@@ -50,9 +49,9 @@ static bool	can_eat(t_table *table, int index)
 	fork_arr = table->fork_arr;
 	left = index % table->n_philo;
 	right = (index + 1) % table->n_philo;
-	if (left == right || should_give_fork(table, index))
+	if (left == right)
 		return (false);
-	mutex_order(table, left, right);
+	pthread_mutex_lock(&table->waiter);
 	can = false;
 	if (fork_arr[left] == 0 && fork_arr[right] == 0)
 	{
@@ -61,8 +60,7 @@ static bool	can_eat(t_table *table, int index)
 		print_status(&table->philo_arr[index], "has taken a fork");
 		can = true;
 	}
-	pthread_mutex_unlock(&table->fork_mutex[left]);
-	pthread_mutex_unlock(&table->fork_mutex[right]);
+	pthread_mutex_unlock(&table->waiter);
 	return (can);
 }
 
@@ -73,11 +71,8 @@ static void	drop_fork(t_table *table, int index)
 
 	left = index % table->n_philo;
 	right = (index + 1) % table->n_philo;
-	mutex_order(table, left, right);
 	table->fork_arr[left] = 0;
 	table->fork_arr[right] = 0;
-	pthread_mutex_unlock(&table->fork_mutex[left]);
-	pthread_mutex_unlock(&table->fork_mutex[right]);
 }
 
 static void	eat(t_philo *philo)
@@ -96,18 +91,4 @@ static void	eat(t_philo *philo)
 	usleep(t_eat * 1000);
 	philo->last_time_eat = get_time_in_ms();
 	drop_fork(philo->table, philo->index);
-}
-
-static bool	should_give_fork(t_table *table, int index)
-{
-	long	my_last_eat;
-	long	left_last_eat;
-	long	right_last_eat;
-
-	my_last_eat = table->philo_arr[index].last_time_eat;
-	left_last_eat = table->philo_arr[(index - 1 + table->n_philo) % table->n_philo].last_time_eat;
-	right_last_eat = table->philo_arr[(index + 1) % table->n_philo].last_time_eat;
-	if (left_last_eat < my_last_eat || right_last_eat < my_last_eat)
-		return (true);
-	return (false);
 }

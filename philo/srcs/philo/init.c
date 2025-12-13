@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:15 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 20:26:09 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/13 21:01:11 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_table(t_table *table, int argc, char **argv)
 	table->thread = malloc(sizeof(pthread_t) * table->n_philo);
 	table->philo_arr = malloc(sizeof(t_philo) * table->n_philo);
 	table->fork_arr = malloc(sizeof(int) * table->n_philo);
-	table->fork_mutex = malloc(sizeof(pthread_mutex_t) * table->n_philo);
+	pthread_mutex_init(&table->waiter, NULL);
 	pthread_mutex_init(&table->mutex, NULL);
 	pthread_mutex_init(&table->print_mutex, NULL);
 	table->philo_died = false;
@@ -55,9 +55,6 @@ int	init_thread(t_table *table)
 
 	i = -1;
 	while (++i < table->n_philo)
-		pthread_mutex_init(&table->fork_mutex[i], NULL);
-	i = -1;
-	while (++i < table->n_philo)
 	{
 		if (pthread_create(&(table->thread[i])
 				, NULL, philo_life, &(table->philo_arr[i])) != 0)
@@ -73,9 +70,7 @@ void	end_thread(t_table *table, int th_created)
 	i = -1;
 	while (++i < th_created)
 		pthread_join(table->thread[i], NULL);
-	i = -1;
-	while (++i < table->n_philo)
-		pthread_mutex_destroy(&table->fork_mutex[i]);
+	pthread_mutex_destroy(&table->waiter);
 	pthread_mutex_destroy(&table->print_mutex);
 	pthread_mutex_destroy(&table->mutex);
 }
@@ -85,5 +80,4 @@ void	free_table(t_table *table)
 	free(table->fork_arr);
 	free(table->philo_arr);
 	free(table->thread);
-	free(table->fork_mutex);
 }

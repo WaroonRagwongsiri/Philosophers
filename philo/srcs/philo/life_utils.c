@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 15:54:59 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 20:36:23 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/13 21:01:19 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,4 @@ bool	should_stop(t_philo *philo, t_table *table)
 		stop = true;
 	}
 	return (stop);
-}
-
-void	mutex_order(t_table *table, int left, int right)
-{
-	if (left < right)
-	{
-		pthread_mutex_lock(&table->fork_mutex[left]);
-		pthread_mutex_lock(&table->fork_mutex[right]);
-	}
-	else
-	{
-		pthread_mutex_lock(&table->fork_mutex[right]);
-		pthread_mutex_lock(&table->fork_mutex[left]);
-	}
 }

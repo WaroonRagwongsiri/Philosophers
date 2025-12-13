@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 21:05:07 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/13 21:01:38 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_table
 	int				*fork_arr;
 	t_philo			*philo_arr;
 	pthread_t		*thread;
-	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	waiter;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	print_mutex;
 	volatile bool	philo_died;
@@ -61,7 +61,6 @@ bool	should_stop(t_philo *philo, t_table *table);
 
 // Philo life Utils
 void	print_status(t_philo *philo, char *status);
-void	mutex_order(t_table *table, int left, int right);
 
 // Utils
 long	ft_atol(const char *nptr);

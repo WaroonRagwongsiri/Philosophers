@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 15:47:44 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/12 20:28:25 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/14 21:53:48 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ long	get_time_in_ms(void)
 
 bool	validate_parser(int argc, char **argv)
 {
-	if (ft_atol(argv[1]) < 1 || ft_atol(argv[2]) < 1 || ft_atol(argv[3]) < 1
-		|| ft_atol(argv[4]) < 1)
+	if (ft_atol(argv[1]) < 0 || ft_atol(argv[2]) < 0 || ft_atol(argv[3]) < 0
+		|| ft_atol(argv[4]) < 0)
 		return (false);
 	if (ft_atol(argv[1]) > INT_MAX || ft_atol(argv[2]) > INT_MAX
 		|| ft_atol(argv[3]) > INT_MAX || ft_atol(argv[4]) > INT_MAX)

@@ -13,7 +13,7 @@
 NAME			:=	philo
 
 CC				:=	cc
-CFLAG			:=	-Wall -Wextra -Werror -g3 -pthread -fsanitize=thread
+CFLAG			:=	-Wall -Wextra -Werror -g3 -pthread
 
 INC_DIR			:=	includes/
 SRCS_DIR		:=	srcs/

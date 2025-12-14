@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/13 22:17:45 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/14 17:21:15 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static bool	can_eat(t_table *table, int index);
 static void	eat(t_philo *philo);
 static void	drop_fork(t_table *table, int index);
+static void	philo_sleep(t_philo *philo);
 
 void	*philo_life(void *arg)
 {
@@ -35,12 +36,11 @@ void	*philo_life(void *arg)
 				break ;
 		}
 		if (should_stop(philo, table))
-				break ;
+			break ;
 		eat(philo);
 		if (should_stop(philo, table))
 			break ;
-		print_status(philo, "is sleeping");
-		usleep(philo->t_sleep * 1000);
+		philo_sleep(philo);
 	}
 	return (NULL);
 }
@@ -99,4 +99,10 @@ static void	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->mutex);
 	usleep(t_eat * 1000);
 	drop_fork(philo->table, philo->index);
+}
+
+static void	philo_sleep(t_philo *philo)
+{
+	print_status(philo, "is sleeping");
+	usleep(philo->t_sleep * 1000);
 }

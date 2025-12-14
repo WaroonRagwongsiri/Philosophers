@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
+#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/23 14:07:23 by waroonwork@       #+#    #+#              #
-#    Updated: 2025/12/12 16:02:34 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/12/14 19:02:04 by waragwon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=	philo
 
 CC				:=	cc
-CFLAG			:=	-Wall -Wextra -Werror -g3 -pthread
+CFLAG			:=	-Wall -Wextra -Werror -g3 -pthread -fsanitize=thread
 
 INC_DIR			:=	includes/
 SRCS_DIR		:=	srcs/

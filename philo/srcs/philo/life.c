@@ -6,7 +6,7 @@
 /*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/14 17:21:15 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/12/14 19:27:29 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ void	*philo_life(void *arg)
 {
 	t_philo	*philo;
 	t_table	*table;
+	bool	continue_simulation;
 
 	philo = (t_philo *)arg;
 	table = (t_table *) philo->table;
-	philo->last_time_eat = get_time_in_ms();
-	while (table->philo_eat_count < table->n_philo)
+	continue_simulation = true;
+	while (continue_simulation)
 	{
-		if (should_stop(philo, table))
+		pthread_mutex_lock(&table->mutex);
+		continue_simulation = !table->philo_died
+			&& table->philo_eat_count < table->n_philo;
+		pthread_mutex_unlock(&table->mutex);
+		if (!continue_simulation || should_stop(philo, table))
 			break ;
 		print_status(philo, "is thinking");
-		while (!can_eat(table, philo->index))
-		{
-			if (should_stop(philo, table))
-				break ;
-		}
+		while (!can_eat(table, philo->index) && !should_stop(philo, table))
+			continue ;
 		if (should_stop(philo, table))
 			break ;
 		eat(philo);
-		if (should_stop(philo, table))
-			break ;
 		philo_sleep(philo);
 	}
 	return (NULL);
@@ -77,10 +77,12 @@ static void	drop_fork(t_table *table, int index)
 	int	left;
 	int	right;
 
+	pthread_mutex_lock(&table->waiter);
 	left = index % table->n_philo;
 	right = (index + 1) % table->n_philo;
 	table->fork_arr[left] = 0;
 	table->fork_arr[right] = 0;
+	pthread_mutex_unlock(&table->waiter);
 }
 
 static void	eat(t_philo *philo)
@@ -91,8 +93,10 @@ static void	eat(t_philo *philo)
 		return ;
 	print_status(philo, "is eating");
 	t_eat = philo->t_eat;
+	pthread_mutex_lock(&philo->philo_mutex);
 	philo->eat_count++;
 	philo->last_time_eat = get_time_in_ms();
+	pthread_mutex_unlock(&philo->philo_mutex);
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->eat_count == philo->table->n_eat_end)
 		philo->table->philo_eat_count++;
@@ -103,6 +107,8 @@ static void	eat(t_philo *philo)
 
 static void	philo_sleep(t_philo *philo)
 {
+	if (should_stop(philo, philo->table))
+		return ;
 	print_status(philo, "is sleeping");
 	usleep(philo->t_sleep * 1000);
 }

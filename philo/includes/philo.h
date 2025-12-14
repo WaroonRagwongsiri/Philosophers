@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/13 21:16:01 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/14 19:05:04 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_philo
 	int				eat_count;
 	long			last_time_eat;
 	struct s_table	*table;
+	pthread_mutex_t	philo_mutex;
 }	t_philo;
 
 typedef struct s_table

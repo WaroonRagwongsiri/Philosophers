@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
+/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:15 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/13 22:17:56 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/14 19:06:14 by waragwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	init_philo(t_table *table)
 		table->philo_arr[i].t_sleep = table->t_sleep;
 		table->philo_arr[i].eat_count = 0;
 		table->philo_arr[i].table = table;
-		table->philo_arr[i].last_time_eat = 0;
+		table->philo_arr[i].last_time_eat = get_time_in_ms();
+		pthread_mutex_init(&table->philo_arr[i].philo_mutex, NULL);
 	}
 }
 
@@ -73,6 +74,9 @@ void	end_thread(t_table *table, int th_created)
 	pthread_mutex_destroy(&table->waiter);
 	pthread_mutex_destroy(&table->print_mutex);
 	pthread_mutex_destroy(&table->mutex);
+	i = -1;
+	while (++i < table->n_philo)
+		pthread_mutex_destroy(&table->philo_arr[i].philo_mutex);
 }
 
 void	free_table(t_table *table)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/14 19:27:29 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:13:08 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*philo_life(void *arg)
 			break ;
 		print_status(philo, "is thinking");
 		while (!can_eat(table, philo->index) && !should_stop(philo, table))
-			continue ;
+			usleep(10);
 		if (should_stop(philo, table))
 			break ;
 		eat(philo);
@@ -57,11 +57,11 @@ static bool	can_eat(t_table *table, int index)
 	right = (index + 1) % table->n_philo;
 	if (left == right)
 		return (false);
+	if (should_give_fork(table, index) || should_stop(&table->philo_arr[index], table))
+		return (false);
 	pthread_mutex_lock(&table->waiter);
 	can = false;
-	if (should_give_fork(table, index))
-		can = false;
-	else if (fork_arr[left] == 0 && fork_arr[right] == 0)
+	if (fork_arr[left] == 0 && fork_arr[right] == 0)
 	{
 		table->fork_arr[left] = 1;
 		table->fork_arr[right] = 1;

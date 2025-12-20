@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/15 22:13:08 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/20 21:00:01 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static bool	can_eat(t_table *table, int index)
 	{
 		table->fork_arr[left] = 1;
 		table->fork_arr[right] = 1;
+		print_status(&table->philo_arr[index], "has taken a fork");
 		print_status(&table->philo_arr[index], "has taken a fork");
 		can = true;
 	}

@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 19:34:10 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 23:30:16 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 23:35:22 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ bool	init_semaphore(t_semaphore *semaphore, int n_philo)
 		return (sem_close(semaphore->stop), false);
 	semaphore->print = sem_open(SEM_PRINT, O_CREAT, 0644, 1);
 	if (semaphore->print == SEM_FAILED)
-		return (sem_close(semaphore->stop), sem_close(semaphore->fork), \
+		return (sem_close(semaphore->stop), sem_close(semaphore->fork),
 			false);
 	semaphore->n_eat = sem_open(SEM_N_EAT, O_CREAT, 0644, 1);
 	if (semaphore->print == SEM_FAILED)
-		return (sem_close(semaphore->stop), sem_close(semaphore->fork), \
+		return (sem_close(semaphore->stop), sem_close(semaphore->fork),
 			sem_close(semaphore->print), false);
 	return (true);
 }

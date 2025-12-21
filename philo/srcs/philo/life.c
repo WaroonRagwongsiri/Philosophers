@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:53:27 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/20 21:00:01 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 23:36:39 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static bool	can_eat(t_table *table, int index)
 	right = (index + 1) % table->n_philo;
 	if (left == right)
 		return (false);
-	if (should_give_fork(table, index) || should_stop(&table->philo_arr[index], table))
+	if (should_give_fork(table, index)
+		|| should_stop(&table->philo_arr[index], table))
 		return (false);
 	pthread_mutex_lock(&table->waiter);
 	can = false;

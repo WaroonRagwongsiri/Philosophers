@@ -6,11 +6,12 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 15:09:59 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 23:34:49 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -60,7 +61,6 @@ typedef struct s_philo
 	t_semaphore		*all_sem;
 }	t_philo;
 
-
 typedef struct s_table
 {
 	t_semaphore	all_sem;
@@ -79,7 +79,7 @@ bool	init_philos(t_table *table);
 
 // Simulation
 void	start_simulation(t_table *table);
-int	create_philo_process(t_table *table);
+int		create_philo_process(t_table *table);
 void	wait_philo(t_table *table, int philo_created);
 void	kill_philo(t_table *table, int philo_created);
 

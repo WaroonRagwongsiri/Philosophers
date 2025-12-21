@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 20:56:45 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 21:13:00 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <limits.h>
 # include <semaphore.h>
 # include <fcntl.h>
+# include <sys/wait.h>
+# include <signal.h>
 
 // Msg
 # define INVALID_ARG "Invalid Arguments\n"
@@ -68,6 +70,9 @@ typedef struct s_table
 	int			n_eat_end;
 	t_philo		*philos;
 }	t_table;
+
+// Simulation
+void	start_simulation(t_table *table);
 
 // Philo
 bool	init_table(t_table *table, int argc, char **argv);

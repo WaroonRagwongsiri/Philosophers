@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:02:50 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 20:55:21 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 21:01:04 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 		return (write(2, ERR_INIT, sizeof(ERR_INIT)), 1);
 	if (init_philos(&table) == false)
 		return (write(2, ERR_MALLOC, sizeof(ERR_MALLOC)), clear_sem(), 1);
+	start_simulation(&table);
 	clear_table(&table);
 	return (0);
 }

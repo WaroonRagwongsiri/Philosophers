@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 21:00:05 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 14:47:35 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 14:55:06 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	create_philo_process(t_table *table)
 		if (table->philos[i].pid == -1)
 			return (i);
 		if (table->philos[i].pid == 0)
-			philosopher(table);
+			philosopher(table, i);
 	}
 	return (i);
 }

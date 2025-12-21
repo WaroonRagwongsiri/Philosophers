@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 14:46:37 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 14:56:18 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	wait_philo(t_table *table, int philo_created);
 void	kill_philo(t_table *table, int philo_created);
 
 // Philosopher
-void	philosopher(t_table *table);
+void	philosopher(t_table *table, int index);
 
 // Initial
 bool	init_table(t_table *table, int argc, char **argv);

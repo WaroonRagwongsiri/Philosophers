@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 19:34:10 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 22:54:24 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 23:30:16 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	init_table(t_table *table, int argc, char **argv)
 
 bool	init_semaphore(t_semaphore *semaphore, int n_philo)
 {
-	semaphore->stop = sem_open(SEM_STOP, O_CREAT, 0644, n_philo);
+	semaphore->stop = sem_open(SEM_STOP, O_CREAT, 0644, 0);
 	if (semaphore->stop == SEM_FAILED)
 		return (false);
 	semaphore->fork = sem_open(SEM_FORK, O_CREAT, 0644, n_philo);

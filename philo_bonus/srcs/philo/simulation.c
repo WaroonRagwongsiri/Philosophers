@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 21:00:05 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 15:18:08 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 22:58:34 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	wait_philo(t_table *table, int philo_created)
 
 	i = -1;
 	while (++i < philo_created)
-		waitpid(table->philos[i].pid, NULL, WNOHANG);
+		waitpid(table->philos[i].pid, NULL, 0);
 	}
 	
 void	kill_philo(t_table *table, int philo_created)

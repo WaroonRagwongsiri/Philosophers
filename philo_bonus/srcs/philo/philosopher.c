@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 14:43:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 15:15:51 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 22:59:29 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	philosopher(t_table *table, int index)
 
 	philo = &table->philos[index];
 	print_status(philo, "life start");
-	usleep(10000);
+	usleep(philo->t_die * 1000);
 	print_status(philo, "died");
 	sem_post(table->all_sem.stop);
 	clear_table(table);

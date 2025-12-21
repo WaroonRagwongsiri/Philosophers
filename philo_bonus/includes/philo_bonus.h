@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 14:56:18 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 15:09:59 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 	int				eat_count;
 	long			last_time_eat;
 	struct s_table	*table;
+	t_semaphore		*all_sem;
 }	t_philo;
 
 
@@ -71,6 +72,11 @@ typedef struct s_table
 	t_philo		*philos;
 }	t_table;
 
+// Initial
+bool	init_table(t_table *table, int argc, char **argv);
+bool	init_semaphore(t_semaphore *semaphore, int n_philo);
+bool	init_philos(t_table *table);
+
 // Simulation
 void	start_simulation(t_table *table);
 int	create_philo_process(t_table *table);
@@ -80,15 +86,10 @@ void	kill_philo(t_table *table, int philo_created);
 // Philosopher
 void	philosopher(t_table *table, int index);
 
-// Initial
-bool	init_table(t_table *table, int argc, char **argv);
-bool	init_semaphore(t_semaphore *semaphore, int n_philo);
-bool	init_philos(t_table *table);
-
 // Philo Utils
-void	clear_sem(t_table *table);
 void	clear_table(t_table *table);
-void	unlink_sem();
+void	clear_sem(t_semaphore *semaphore);
+void	print_status(t_philo *philo, char *status);
 
 // Utils
 bool	validate_parser(int argc, char **argv);

@@ -6,30 +6,41 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 14:38:52 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 14:39:40 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 15:09:30 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	clear_sem(t_table *table)
+void	clear_sem(t_semaphore *semaphore)
 {
-	sem_close(table->all_sem.stop);
-	sem_close(table->all_sem.fork);
-	sem_close(table->all_sem.print);
-	sem_close(table->all_sem.n_eat);
+	if (semaphore->stop != SEM_FAILED) {
+		sem_close(semaphore->stop);
+		sem_unlink(SEM_STOP);
+	}
+	if (semaphore->fork != SEM_FAILED) {
+		sem_close(semaphore->fork);
+		sem_unlink(SEM_FORK);
+	}
+	if (semaphore->print != SEM_FAILED) {
+		sem_close(semaphore->print);
+		sem_unlink(SEM_PRINT);
+	}
+	if (semaphore->n_eat != SEM_FAILED) {
+		sem_close(semaphore->n_eat);
+		sem_unlink(SEM_N_EAT);
+	}
 }
 
 void	clear_table(t_table *table)
 {
 	free(table->philos);
-	clear_sem(table);
+	clear_sem(&table->all_sem);
 }
 
-void	unlink_sem()
+void	print_status(t_philo *philo, char *status)
 {
-	sem_unlink(SEM_STOP);
-	sem_unlink(SEM_FORK);
-	sem_unlink(SEM_PRINT);
-	sem_unlink(SEM_N_EAT);
+	sem_wait(philo->all_sem->print);
+	printf("%ld %d %s\n", get_time_in_ms(), philo->index, status);
+	sem_post(philo->all_sem->print);
 }

@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 19:34:10 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 14:39:00 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 15:17:42 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ bool	init_philos(t_table *table)
 		table->philos[i].t_sleep = table->t_sleep;
 		table->philos[i].eat_count = 0;
 		table->philos[i].last_time_eat = get_time_in_ms();
+		table->philos[i].table = table;
+		table->philos[i].all_sem = &table->all_sem;
 	}
 	return (true);
 }

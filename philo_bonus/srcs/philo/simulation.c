@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 21:00:05 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 14:55:06 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 15:18:08 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	start_simulation(t_table *table)
 
 	philo_created = create_philo_process(table);
 	wait_philo(table, philo_created);
+	if (philo_created != table->n_philo)
+		sem_post(table->all_sem.stop);
+	sem_wait(table->all_sem.stop);
 	kill_philo(table, philo_created);
 }
 

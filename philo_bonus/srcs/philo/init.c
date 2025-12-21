@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 19:34:10 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 20:53:40 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 14:39:00 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,4 @@ bool	init_philos(t_table *table)
 		table->philos[i].last_time_eat = get_time_in_ms();
 	}
 	return (true);
-}
-
-void	clear_sem()
-{
-	sem_unlink(SEM_STOP);
-	sem_unlink(SEM_FORK);
-	sem_unlink(SEM_PRINT);
-	sem_unlink(SEM_N_EAT);
-}
-
-void	clear_table(t_table *table)
-{
-	free(table->philos);
-	clear_sem();
 }

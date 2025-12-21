@@ -12,7 +12,6 @@
 
 #include "philo_bonus.h"
 
-
 long	ft_atol(const char *nptr)
 {
 	long	ans;

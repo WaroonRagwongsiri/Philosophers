@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 21:13:00 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 14:46:37 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,22 @@ typedef struct s_table
 
 // Simulation
 void	start_simulation(t_table *table);
+int	create_philo_process(t_table *table);
+void	wait_philo(t_table *table, int philo_created);
+void	kill_philo(t_table *table, int philo_created);
 
-// Philo
+// Philosopher
+void	philosopher(t_table *table);
+
+// Initial
 bool	init_table(t_table *table, int argc, char **argv);
 bool	init_semaphore(t_semaphore *semaphore, int n_philo);
-void	clear_sem();
 bool	init_philos(t_table *table);
+
+// Philo Utils
+void	clear_sem(t_table *table);
 void	clear_table(t_table *table);
+void	unlink_sem();
 
 // Utils
 bool	validate_parser(int argc, char **argv);

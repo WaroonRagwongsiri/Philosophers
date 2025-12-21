@@ -6,12 +6,11 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:02:50 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 21:01:04 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/21 14:40:22 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -24,8 +23,9 @@ int	main(int argc, char **argv)
 	if (init_table(&table, argc, argv) == false)
 		return (write(2, ERR_INIT, sizeof(ERR_INIT)), 1);
 	if (init_philos(&table) == false)
-		return (write(2, ERR_MALLOC, sizeof(ERR_MALLOC)), clear_sem(), 1);
+		return (write(2, ERR_MALLOC, sizeof(ERR_MALLOC)), clear_sem(&table), 1);
 	start_simulation(&table);
 	clear_table(&table);
+	unlink_sem();
 	return (0);
 }

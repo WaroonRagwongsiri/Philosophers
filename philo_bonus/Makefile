@@ -6,7 +6,7 @@
 #    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/23 14:07:23 by waroonwork@       #+#    #+#              #
-#    Updated: 2025/12/21 21:00:42 by waroonwork@      ###   ########.fr        #
+#    Updated: 2025/12/21 14:46:05 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS_DIR		:=	srcs/
 
 SRCS_FILES		:=	main.c \
 					utils/utils1.c \
-					philo/init.c philo/simulation.c \
+					philo/init.c philo/simulation.c philo/utils1.c \
+					philo/philosopher.c
 
 SRCS			:=	$(SRCS_FILES:%.c=$(SRCS_DIR)%.c)
 OBJS			:=	$(SRCS:%.c=%.o)

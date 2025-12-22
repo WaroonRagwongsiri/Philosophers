@@ -6,22 +6,29 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 21:00:05 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 23:35:51 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/22 11:02:09 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+static void	*monitor_n_eat(void *args);
+
 void	start_simulation(t_table *table)
 {
-	int	philo_created;
+	int			philo_created;
+	pthread_t	monitor_thread;
 
 	philo_created = create_philo_process(table);
 	if (philo_created != table->n_philo)
 		sem_post(table->all_sem.stop);
+	if (table->n_eat_end > 0)
+		pthread_create(&monitor_thread, NULL, monitor_n_eat, table);
 	sem_wait(table->all_sem.stop);
 	kill_philo(table, philo_created);
 	wait_philo(table, philo_created);
+	if (monitor_thread)
+		pthread_cancel(monitor_thread);
 }
 
 int	create_philo_process(t_table *table)
@@ -56,4 +63,18 @@ void	kill_philo(t_table *table, int philo_created)
 	i = -1;
 	while (++i < philo_created)
 		kill(table->philos[i].pid, SIGKILL);
+}
+
+static void	*monitor_n_eat(void *args)
+{
+	t_table	*table;
+	int		i;
+
+	table = (t_table *)args;
+	i = -1;
+	while (++i < table->n_philo)
+		sem_wait(table->all_sem.n_eat);
+	sem_wait(table->all_sem.n_eat);
+	sem_post(table->all_sem.stop);
+	return (NULL);
 }

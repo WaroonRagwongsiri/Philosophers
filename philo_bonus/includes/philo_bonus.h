@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 23:34:49 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/22 11:12:45 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define SEM_FORK "/fork"
 # define SEM_PRINT "/print"
 # define SEM_N_EAT "/n_eat"
+# define SEM_MEAL "/last_meal"
 
 // Const
 # define MAX_PHILO 10000
@@ -46,6 +47,7 @@ typedef struct s_semaphore
 	sem_t	*print;
 	sem_t	*stop;
 	sem_t	*n_eat;
+	sem_t	*last_meal;
 }	t_semaphore;
 
 typedef struct s_philo
@@ -74,7 +76,7 @@ typedef struct s_table
 
 // Initial
 bool	init_table(t_table *table, int argc, char **argv);
-bool	init_semaphore(t_semaphore *semaphore, int n_philo);
+bool	init_semaphore(t_semaphore *semaphore, t_table *table);
 bool	init_philos(t_table *table);
 
 // Simulation

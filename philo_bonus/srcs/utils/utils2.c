@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 14:38:52 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 23:36:02 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/22 11:13:13 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,15 @@
 void	clear_sem(t_semaphore *semaphore)
 {
 	if (semaphore->stop != SEM_FAILED)
-	{
 		sem_close(semaphore->stop);
-		sem_unlink(SEM_STOP);
-	}
 	if (semaphore->fork != SEM_FAILED)
-	{
 		sem_close(semaphore->fork);
-		sem_unlink(SEM_FORK);
-	}
 	if (semaphore->print != SEM_FAILED)
-	{
 		sem_close(semaphore->print);
-		sem_unlink(SEM_PRINT);
-	}
 	if (semaphore->n_eat != SEM_FAILED)
-	{
 		sem_close(semaphore->n_eat);
-		sem_unlink(SEM_N_EAT);
-	}
+	if (semaphore->last_meal != SEM_FAILED)
+		sem_close(semaphore->last_meal);
 }
 
 void	clear_table(t_table *table)

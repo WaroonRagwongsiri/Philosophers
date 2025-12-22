@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 19:34:10 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/22 11:12:40 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/22 18:15:35 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ bool	init_semaphore(t_semaphore *semaphore, t_table *table)
 	if (semaphore->print == SEM_FAILED)
 		return (sem_close(semaphore->stop), sem_close(semaphore->fork),
 			false);
-	semaphore->n_eat = sem_open(SEM_N_EAT, O_CREAT, 0644, 0);	
+	semaphore->n_eat = sem_open(SEM_N_EAT, O_CREAT, 0644, 0);
 	if (semaphore->n_eat == SEM_FAILED)
 		return (sem_close(semaphore->stop), sem_close(semaphore->fork),
 			sem_close(semaphore->print), false);
-	semaphore->last_meal = sem_open(SEM_MEAL, O_CREAT, 0644, table->n_philo);	
+	semaphore->last_meal = sem_open(SEM_MEAL, O_CREAT, 0644, table->n_philo);
 	if (semaphore->last_meal == SEM_FAILED)
 		return (sem_close(semaphore->stop), sem_close(semaphore->fork),
 			sem_close(semaphore->print), sem_close(semaphore->n_eat),

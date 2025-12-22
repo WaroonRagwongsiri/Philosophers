@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 14:43:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/22 11:10:50 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/22 18:16:17 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	*life(void *args)
 	philo = (t_philo *)args;
 	if (philo->index % 2 == 0)
 		usleep(1000);
-	
 	while (1)
 	{
 		print_status(philo, "is thinking");
@@ -70,6 +69,6 @@ static void	eat(t_philo *philo)
 	sem_post(philo->all_sem->fork);
 	sem_post(philo->all_sem->fork);
 	philo->eat_count++;
-	if (philo->table->n_eat_end > 0 && philo->eat_count >= philo->table->n_eat_end)
+	if (philo->eat_count == philo->table->n_eat_end)
 		sem_post(philo->all_sem->n_eat);
 }

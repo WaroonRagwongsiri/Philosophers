@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 21:00:05 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/22 14:54:21 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/23 17:31:06 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	start_simulation(t_table *table)
 	int			philo_created;
 	pthread_t	monitor_thread;
 	int			i;
-	
+
 	if (table->n_eat_end > 0)
 		pthread_create(&monitor_thread, NULL, monitor_n_eat, table);
 	philo_created = create_philo_process(table);

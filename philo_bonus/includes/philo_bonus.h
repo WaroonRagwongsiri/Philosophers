@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:03:04 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/22 11:12:45 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/24 11:14:07 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,8 @@ void	print_status(t_philo *philo, char *status);
 bool	validate_parser(int argc, char **argv);
 long	get_time_in_ms(void);
 long	ft_atol(const char *nptr);
+int		ft_strlen(char *str);
+bool	validate_parser_num(int argc, char **argv);
+bool	all_space(char *str);
 
 #endif

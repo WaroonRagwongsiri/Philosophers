@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+         #
+#    By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/23 14:07:23 by waroonwork@       #+#    #+#              #
-#    Updated: 2025/12/14 19:02:04 by waragwon         ###   ########.fr        #
+#    Updated: 2025/12/24 11:10:45 by waroonwork@      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_DIR			:=	includes/
 SRCS_DIR		:=	srcs/
 
 SRCS_FILES		:=	main.c \
-					utils/utils1.c \
+					utils/utils1.c utils/utils2.c \
 					philo/init.c philo/life.c philo/life_utils.c
 
 SRCS			:=	$(SRCS_FILES:%.c=$(SRCS_DIR)%.c)

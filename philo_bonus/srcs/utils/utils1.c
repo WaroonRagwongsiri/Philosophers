@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 21:12:43 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/21 20:56:49 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/24 11:13:59 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,4 @@ long	get_time_in_ms(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-bool	validate_parser(int argc, char **argv)
-{
-	if (ft_atol(argv[1]) < 0 || ft_atol(argv[2]) < 0 || ft_atol(argv[3]) < 0
-		|| ft_atol(argv[4]) < 0)
-		return (false);
-	if (ft_atol(argv[1]) > MAX_PHILO || ft_atol(argv[2]) > INT_MAX
-		|| ft_atol(argv[3]) > INT_MAX || ft_atol(argv[4]) > INT_MAX)
-		return (false);
-	if (argc == 6 && ft_atol(argv[5]) < 1)
-		return (false);
-	if (argc == 6 && ft_atol(argv[5]) > INT_MAX)
-		return (false);
-	return (true);
 }

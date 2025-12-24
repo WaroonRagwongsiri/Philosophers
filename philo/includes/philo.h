@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: waragwon <waragwon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:13:08 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/14 19:05:04 by waragwon         ###   ########.fr       */
+/*   Updated: 2025/12/24 11:11:33 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ long	get_time_in_ms(void);
 void	end_thread(t_table *table, int th_created);
 void	free_table(t_table *table);
 bool	validate_parser(int argc, char **argv);
+int		ft_strlen(char *str);
+bool	validate_parser_num(int argc, char **argv);
+bool	all_space(char *str);
 
 #endif

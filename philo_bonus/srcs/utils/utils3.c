@@ -6,7 +6,7 @@
 /*   By: waroonwork@gmail.com <WaroonRagwongsiri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 11:09:07 by waroonwork@       #+#    #+#             */
-/*   Updated: 2025/12/24 11:14:44 by waroonwork@      ###   ########.fr       */
+/*   Updated: 2025/12/24 18:17:41 by waroonwork@      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ bool	validate_parser_num(int argc, char **argv)
 	}
 	return (true);
 }
-
 
 bool	all_space(char *str)
 {
